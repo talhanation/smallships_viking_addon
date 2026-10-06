@@ -1,0 +1,14 @@
+{
+  "entity.smallships_viking_addon.knarr": "Knarr",
+  "entity.smallships_viking_addon.longship": "Longship",
+  "entity.smallships_viking_addon.transport_drakkar": "Transport Drakkar",
+
+
+  "gui.smallships.dockyard.about.smallships_viking_addon.knarr": "The knarr is a single-masted ship with a sail and oars. With the sail furled it can be rowed at about two thirds of its top speed in any wind. Under sail, a tail wind gives it a strong speed bonus, a side wind a small one. Up to six shields can be hung along its sides, three on each side, and every shield reduces the damage the ship takes. It breaks through regular ice. It sails faster in cold waters.",
+  "gui.smallships.dockyard.about.smallships_viking_addon.longship": "The longship is a single-masted ship with a sail and oars. With the sail furled it can be rowed at about three quarters of its top speed in any wind. Under sail, a tail wind gives it a strong speed bonus, a side wind a small one. Up to ten shields can be hung along its sides, five on each side, and every shield reduces the damage the ship takes. It breaks through regular ice. It sails faster in cold waters.",
+  "gui.smallships.dockyard.about.smallships_viking_addon.transport_drakkar": "The transport drakkar is a single-masted ship with a sail and oars. With the sail furled it can be rowed at about three quarters of its top speed in any wind. Under sail, a tail wind gives it a strong speed bonus, a side wind a small one. Up to ten shields can be hung along its sides, five on each side, and every shield reduces the damage the ship takes. It breaks through regular ice. It sails faster in cold waters.",
+
+  "chat.smallships_viking_addon.update.available": "A new version of Small Ships Viking Addon is available: %s (installed: %s)",
+  "chat.smallships_viking_addon.update.download": "Download the update %s",
+  "chat.smallships_viking_addon.update.here": "here"
+}
