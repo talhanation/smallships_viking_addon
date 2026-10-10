@@ -8,16 +8,12 @@ import com.talhanation.smallships.world.entity.ship.hitbox.ShipPartEntity;
 import com.talhanation.smallships.world.entity.ship.seat.ShipSeat;
 import com.talhanation.smallships_viking_addon.config.AddonConfig;
 import com.talhanation.smallships_viking_addon.world.entity.AddonEntityTypes;
-import com.talhanation.smallships_viking_addon.world.item.AddonItems;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.vehicle.Boat;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
@@ -39,7 +35,7 @@ public class TransportDrakkarEntity extends ContainerShip implements Bannerable,
     // how many of each upgrade item this hull needs at the dockyard
     private static final Map<ShipUpgrade, Integer> UPGRADE_COSTS = Map.of(
             ShipUpgrade.IRON_SCANTLINGS, 7,
-            ShipUpgrade.COTTON_SAILS, 1,
+            ShipUpgrade.COTTON_SAILS, 3,
             ShipUpgrade.COPPER_PLATING, 7
     );
 
@@ -74,13 +70,6 @@ public class TransportDrakkarEntity extends ContainerShip implements Bannerable,
     }
 
     @Override
-    public @NotNull Item getDropItem() {
-        // respect the main mods' item drop switch
-        if (!SmallShipsConfig.Server.shipGeneralDoItemDrop.get()) return ItemStack.EMPTY.getItem();
-        return AddonItems.TRANSPORT_DRAKKAR_ITEMS.get(this.getVariant());
-    }
-
-    @Override
     public BiomeModifierType getBiomeModifierType() {
         return AddonConfig.transportDrakkarBiome.get();
     }
@@ -89,15 +78,19 @@ public class TransportDrakkarEntity extends ContainerShip implements Bannerable,
     // hitbox parts along the keel: hull(v, y, h, width, height), mast(v, h, thickness, height);
     // v = forward (positive = bow), h = sideways. Masts also define how many sails the ship has.
     private static final List<ShipPartEntity.Definition> PARTS = List.of(
-            ShipPartEntity.Definition.hull(-2.3F, 0.0F, 0.0F, 2.8F, 1.6F),//back
-            ShipPartEntity.Definition.hull(2.65F, 0.0F, 0.0F, 2.5F, 1.6F),//front
-            ShipPartEntity.Definition.hull(0.0F, 0.0F, 0.0F, 3.00F, 1.6F),//center
-            ShipPartEntity.Definition.hull(3.80F, 0.0F, 0.0F, 2.5F, 1.6F),//front ram
+            ShipPartEntity.Definition.hull(-4.0F, -0.50F, 0.0F, 3.0F, 1.75F),//back
+            ShipPartEntity.Definition.hull(5.0F, -0.50F, 0.0F, 3.0F, 1.75F),//front
 
-            ShipPartEntity.Definition.hull(4.75F, 1.5F, 0.0F, 0.75F, 3.0F),//dragon head
-            ShipPartEntity.Definition.hull(-3.5F, 1.5F, 0.0F, 0.75F, 3.0F),//dragon tail
+            ShipPartEntity.Definition.hull(-2.0F, -0.50F, 0.0F, 3.75F, 1.75F),//center back
 
-            ShipPartEntity.Definition.mast(-0.1F, 0.0F, 0.3F, 9.0F)//mast
+            ShipPartEntity.Definition.hull(0.0F, -0.50F, 0.0F, 3.75F, 1.75F),//center
+
+            ShipPartEntity.Definition.hull(3.0F, -0.5F, 0.0F, 3.75F, 1.75F),//center front
+
+            ShipPartEntity.Definition.hull(6.5F, 0.5F, 0.0F, 1.0F, 4.0F),//dragon head
+            ShipPartEntity.Definition.hull(-5.5F, 0.5F, 0.0F, 1.0F, 3.5F),//dragon tail
+
+            ShipPartEntity.Definition.mast(0.5F, 0.0F, 0.3F, 10.5F)//mast
     );
 
     @Override
@@ -109,48 +102,51 @@ public class TransportDrakkarEntity extends ContainerShip implements Bannerable,
 
     // seats: driver/passenger(id, v, y, h) - ids must be unique, y is on top of the deck
     // 30 seats: the helm, nine rows of three and two in the bow
-    private static final float deck = 0.4F;
+    private static final float deck = 0.2F;
     private static final List<ShipSeat> SEATS = List.of(
-            ShipSeat.driver(0, -2.8F, deck, 0.0F),
+            ShipSeat.driver(0, -4.5F, deck, 0.5F),
+            ShipSeat.passenger(1, -4.5F, deck, -0.5F),
 
-            ShipSeat.passenger(1, -2.2F, deck, 0.9F),
-            ShipSeat.passenger(2, -2.2F, deck, 0.0F),
-            ShipSeat.passenger(3, -2.2F, deck, -0.9F),
+            ShipSeat.passenger(2, -3.0F, deck, 0.9F),
+            ShipSeat.passenger(3, -3.0F, deck, 0.0F),
+            ShipSeat.passenger(4, -3.0F, deck, -0.9F),
 
-            ShipSeat.passenger(4, -1.4F, deck, 0.9F),
-            ShipSeat.passenger(5, -1.4F, deck, 0.0F),
-            ShipSeat.passenger(6, -1.4F, deck, -0.9F),
+            ShipSeat.passenger(5, -2.0F, deck, 1.5F),
+            ShipSeat.passenger(6, -2.0F, deck, 0.5F),
+            ShipSeat.passenger(7, -2.0F, deck, -0.5F),
+            ShipSeat.passenger(8, -2.0F, deck, -1.5F),
 
-            ShipSeat.passenger(7, -0.6F, deck, 0.9F),
-            ShipSeat.passenger(8, -0.6F, deck, 0.0F),
-            ShipSeat.passenger(9, -0.6F, deck, -0.9F),
+            ShipSeat.passenger(9, -1.0F, deck, 1.5F),
+            ShipSeat.passenger(10, -1.0F, deck, 0.5F),
+            ShipSeat.passenger(11, -1.0F, deck, -0.5F),
+            ShipSeat.passenger(12, -1.0F, deck, -1.5F),
 
-            ShipSeat.passenger(10, 0.2F, deck, 0.9F),
-            ShipSeat.passenger(11, 0.2F, deck, 0.0F),
-            ShipSeat.passenger(12, 0.2F, deck, -0.9F),
+            ShipSeat.passenger(13, 0.0F, deck, 1.5F),
+            ShipSeat.passenger(14, 0.0F, deck, 0.5F),
+            ShipSeat.passenger(15, 0.0F, deck, -0.5F),
+            ShipSeat.passenger(16, 0.0F, deck, -1.5F),
 
-            ShipSeat.passenger(13, 1.0F, deck, 0.9F),
-            ShipSeat.passenger(14, 1.0F, deck, 0.0F),
-            ShipSeat.passenger(15, 1.0F, deck, -0.9F),
+            ShipSeat.passenger(17, 1.0F, deck, 1.5F),
+            ShipSeat.passenger(18, 1.0F, deck, 0.5F),
+            ShipSeat.passenger(19, 1.0F, deck, -0.5F),
+            ShipSeat.passenger(20, 1.0F, deck, -1.5F),
 
-            ShipSeat.passenger(16, 1.8F, deck, 0.9F),
-            ShipSeat.passenger(17, 1.8F, deck, 0.0F),
-            ShipSeat.passenger(18, 1.8F, deck, -0.9F),
+            ShipSeat.passenger(21, 2.0F, deck, 1.5F),
+            ShipSeat.passenger(22, 2.0F, deck, 0.5F),
+            ShipSeat.passenger(23, 2.0F, deck, -0.5F),
+            ShipSeat.passenger(24, 2.0F, deck, -1.5F),
 
-            ShipSeat.passenger(19, 2.6F, deck, 0.9F),
-            ShipSeat.passenger(20, 2.6F, deck, 0.0F),
-            ShipSeat.passenger(21, 2.6F, deck, -0.9F),
+            ShipSeat.passenger(25, 3.0F, deck, 1.5F),
+            ShipSeat.passenger(26, 3.0F, deck, 0.5F),
+            ShipSeat.passenger(27, 3.0F, deck, -0.5F),
+            ShipSeat.passenger(28, 3.0F, deck, -1.5F),
 
-            ShipSeat.passenger(22, 3.4F, deck, 0.9F),
-            ShipSeat.passenger(23, 3.4F, deck, 0.0F),
-            ShipSeat.passenger(24, 3.4F, deck, -0.9F),
+            ShipSeat.passenger(29, 4.0F, deck, 0.9F),
+            ShipSeat.passenger(30, 4.0F, deck, 0.0F),
+            ShipSeat.passenger(31, 4.0F, deck, -0.9F),
 
-            ShipSeat.passenger(25, 4.2F, deck, 0.9F),
-            ShipSeat.passenger(26, 4.2F, deck, 0.0F),
-            ShipSeat.passenger(27, 4.2F, deck, -0.9F),
-
-            ShipSeat.passenger(28, 4.9F, deck, 0.45F),
-            ShipSeat.passenger(29, 4.9F, deck, -0.45F)
+            ShipSeat.passenger(32, 5.0F, deck, 0.5F),
+            ShipSeat.passenger(33, 5.0F, deck, -0.5F)
     );
 
     @Override
@@ -232,28 +228,38 @@ public class TransportDrakkarEntity extends ContainerShip implements Bannerable,
 
     @Override
     public byte getMaxShieldsPerSide() {
-        return 5;
+        return 7;
     }
 
     private static final List<ShieldPosition> SHIELD_POSITIONS = new ArrayList<>();
 
     static {
-        SHIELD_POSITIONS.add(new ShieldPosition(2.1, 0.8, -1.0, true));
-        SHIELD_POSITIONS.add(new ShieldPosition(2.1, 0.8, 1.0, false));
-        SHIELD_POSITIONS.add(new ShieldPosition(0.9, 0.8, -1.2, true));
-        SHIELD_POSITIONS.add(new ShieldPosition(0.9, 0.8, 1.2, false));
-        SHIELD_POSITIONS.add(new ShieldPosition(-0.3, 0.8, -1.2, true));
-        SHIELD_POSITIONS.add(new ShieldPosition(-0.3, 0.8, 1.2, false));
-        SHIELD_POSITIONS.add(new ShieldPosition(-1.5, 0.8, -1.2, true));
-        SHIELD_POSITIONS.add(new ShieldPosition(-1.5, 0.8, 1.2, false));
-        SHIELD_POSITIONS.add(new ShieldPosition(-3.0, 0.8, -1.0, true));
-        SHIELD_POSITIONS.add(new ShieldPosition(-3.0, 0.8, 1.0, false));
+        SHIELD_POSITIONS.add(new ShieldPosition(3.6, 0.8, -1.5, true));
+        SHIELD_POSITIONS.add(new ShieldPosition(3.6, 0.8, 1.5, false));
+
+        SHIELD_POSITIONS.add(new ShieldPosition(2.1, 0.8, -1.7, true));
+        SHIELD_POSITIONS.add(new ShieldPosition(2.1, 0.8, 1.7, false));
+
+        SHIELD_POSITIONS.add(new ShieldPosition(1.5, 0.8, -1.7, true));
+        SHIELD_POSITIONS.add(new ShieldPosition(1.5, 0.8, 1.7, false));
+
+        SHIELD_POSITIONS.add(new ShieldPosition(0.25, 0.8, -1.7, true));
+        SHIELD_POSITIONS.add(new ShieldPosition(0.25, 0.8, 1.7, false));
+
+        SHIELD_POSITIONS.add(new ShieldPosition(-1.25, 0.8, -1.7, true));
+        SHIELD_POSITIONS.add(new ShieldPosition(-1.25, 0.8, 1.7, false));
+
+        SHIELD_POSITIONS.add(new ShieldPosition(-2.25, 0.8, -1.7, true));
+        SHIELD_POSITIONS.add(new ShieldPosition(-2.25, 0.8, 1.7, false));
+
+        SHIELD_POSITIONS.add(new ShieldPosition(-3.25, 0.8, -1.5, true));
+        SHIELD_POSITIONS.add(new ShieldPosition(-3.25, 0.8, 1.5, false));
     }
 
     /* ---------------- Render ---------------- */
     // height of the render pose above the ship position, the renderer translates by it
     @Override
     public float getRenderPoseHeight() {
-        return 3.1F;
+        return 2.75F;
     }
 }

@@ -1,6 +1,6 @@
 package com.talhanation.smallships_viking_addon.world.entity.forge;
 
-import com.talhanation.smallships_viking_addon.SmallShipsAddonMod;
+import com.talhanation.smallships_viking_addon.SmallShipsVikingAddonMod;
 import com.talhanation.smallships_viking_addon.world.entity.ship.KnarrEntity;
 import com.talhanation.smallships_viking_addon.world.entity.ship.LongshipEntity;
 import com.talhanation.smallships_viking_addon.world.entity.ship.TransportDrakkarEntity;
@@ -27,13 +27,13 @@ public class AddonEntityTypesImpl {
         return (EntityType<T>) entries.get(entityClass).get();
     }
 
-    public static final DeferredRegister<EntityType<?>> ENTITY_TYPES = DeferredRegister.create(ForgeRegistries.ENTITY_TYPES, SmallShipsAddonMod.MOD_ID);
+    public static final DeferredRegister<EntityType<?>> ENTITY_TYPES = DeferredRegister.create(ForgeRegistries.ENTITY_TYPES, SmallShipsVikingAddonMod.MOD_ID);
 
     static {
         // sized like the main mods' Drakkar until the models are in
         entries.put(KnarrEntity.class, ENTITY_TYPES.register(KnarrEntity.ID,
                 () -> EntityType.Builder.of(KnarrEntity::new, MobCategory.MISC)
-                        .sized(3.5F, 1.25F)
+                        .sized(1.25F, 1.25F)
                         .clientTrackingRange(20)
                         .setUpdateInterval(10)
                         .setShouldReceiveVelocityUpdates(true)
@@ -41,7 +41,7 @@ public class AddonEntityTypesImpl {
 
         entries.put(LongshipEntity.class, ENTITY_TYPES.register(LongshipEntity.ID,
                 () -> EntityType.Builder.of(LongshipEntity::new, MobCategory.MISC)
-                        .sized(3.5F, 1.25F)
+                        .sized(1.25F, 1.25F)
                         .clientTrackingRange(20)
                         .setUpdateInterval(10)
                         .setShouldReceiveVelocityUpdates(true)
@@ -49,7 +49,7 @@ public class AddonEntityTypesImpl {
 
         entries.put(TransportDrakkarEntity.class, ENTITY_TYPES.register(TransportDrakkarEntity.ID,
                 () -> EntityType.Builder.of(TransportDrakkarEntity::new, MobCategory.MISC)
-                        .sized(3.5F, 1.25F)
+                        .sized(1.25F, 1.25F)
                         .clientTrackingRange(20)
                         .setUpdateInterval(10)
                         .setShouldReceiveVelocityUpdates(true)

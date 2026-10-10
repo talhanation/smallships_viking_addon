@@ -1,10 +1,10 @@
 package com.talhanation.smallships_viking_addon.forge;
 
-import com.talhanation.smallships_viking_addon.SmallShipsAddonMod;
+import com.talhanation.smallships_viking_addon.SmallShipsVikingAddonMod;
 import com.talhanation.smallships_viking_addon.forge.client.ClientModBus;
 import com.talhanation.smallships_viking_addon.forge.events.UpdateEvents;
 import com.talhanation.smallships_viking_addon.world.entity.forge.AddonEntityTypesImpl;
-import com.talhanation.smallships_viking_addon.world.item.forge.AddonItemsImpl;
+import com.talhanation.smallships_viking_addon.world.item.AddonItems;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -26,24 +26,26 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
  * ShipRegistry reads the dockyard whitelist and the ship entities read their
  * container size, so registering too early would read defaults.
  */
-@Mod(SmallShipsAddonMod.MOD_ID)
+@Mod(SmallShipsVikingAddonMod.MOD_ID)
 public class SmallShipsAddonForge {
 
     public SmallShipsAddonForge() {
         IEventBus modBus = FMLJavaModLoadingContext.get().getModEventBus();
 
         AddonEntityTypesImpl.ENTITY_TYPES.register(modBus);
-        AddonItemsImpl.ITEMS.register(modBus);
+        // the ship items go through SmallShips, and only take them here in the
+        // constructor - see AddonItems
+        AddonItems.register();
 
         modBus.addListener(this::commonSetup);
         DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> modBus.register(new ClientModBus()));
 
         MinecraftForge.EVENT_BUS.register(new UpdateEvents());
 
-        new SmallShipsAddonMod();
+        new SmallShipsVikingAddonMod();
     }
 
     private void commonSetup(FMLCommonSetupEvent event) {
-        event.enqueueWork(SmallShipsAddonMod::init);
+        event.enqueueWork(SmallShipsVikingAddonMod::init);
     }
 }

@@ -2,7 +2,7 @@ package com.talhanation.smallships_viking_addon.world.entity.ship;
 
 import com.talhanation.smallships.api.ShipRegistry;
 import com.talhanation.smallships.api.ShipType;
-import com.talhanation.smallships_viking_addon.SmallShipsAddonMod;
+import com.talhanation.smallships_viking_addon.SmallShipsVikingAddonMod;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.Items;
@@ -46,6 +46,6 @@ public class AddonShipTypes {
     }
 
     private static ResourceLocation id(String path) {
-        return new ResourceLocation(SmallShipsAddonMod.MOD_ID, path);
+        return new ResourceLocation(SmallShipsVikingAddonMod.MOD_ID, path);
     }
 }

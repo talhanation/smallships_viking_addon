@@ -1,6 +1,6 @@
 package com.talhanation.smallships_viking_addon.client;
 
-import com.talhanation.smallships_viking_addon.SmallShipsAddonMod;
+import com.talhanation.smallships_viking_addon.SmallShipsVikingAddonMod;
 import com.talhanation.smallships_viking_addon.config.AddonConfig;
 import com.talhanation.smallships_viking_addon.update.UpdateChecker;
 import net.minecraft.ChatFormatting;
@@ -41,7 +41,7 @@ public class UpdateNotifier {
                     if (minecraft.player != null) showMessage(minecraft, result);
                 }
                 case FAILED -> {
-                    if (!failureLogged) SmallShipsAddonMod.LOGGER.error("Small Ships Viking Addon could not check for updates!");
+                    if (!failureLogged) SmallShipsVikingAddonMod.LOGGER.error("Small Ships Viking Addon could not check for updates!");
                     failureLogged = true;
                 }
                 default -> {}

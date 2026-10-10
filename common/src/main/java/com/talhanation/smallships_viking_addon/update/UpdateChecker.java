@@ -2,7 +2,7 @@ package com.talhanation.smallships_viking_addon.update;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import com.talhanation.smallships_viking_addon.SmallShipsAddonMod;
+import com.talhanation.smallships_viking_addon.SmallShipsVikingAddonMod;
 import com.talhanation.smallships_viking_addon.config.AddonConfig;
 import dev.architectury.injectables.annotations.ExpectPlatform;
 import net.minecraft.SharedConstants;
@@ -109,10 +109,10 @@ public class UpdateChecker {
         check().thenAccept(checked -> {
             switch (checked.status()) {
                 case OUTDATED -> {
-                    SmallShipsAddonMod.LOGGER.warn("A new version of Small Ships Viking Addon is available: {} (installed: {})", checked.latestVersion(), checked.currentVersion());
-                    SmallShipsAddonMod.LOGGER.warn("Download the new update here: {}", checked.homepage());
+                    SmallShipsVikingAddonMod.LOGGER.warn("A new version of Small Ships Viking Addon is available: {} (installed: {})", checked.latestVersion(), checked.currentVersion());
+                    SmallShipsVikingAddonMod.LOGGER.warn("Download the new update here: {}", checked.homepage());
                 }
-                case FAILED -> SmallShipsAddonMod.LOGGER.error("Small Ships Viking Addon could not check for updates!");
+                case FAILED -> SmallShipsVikingAddonMod.LOGGER.error("Small Ships Viking Addon could not check for updates!");
                 default -> {}
             }
         });
@@ -141,7 +141,7 @@ public class UpdateChecker {
         } catch (Exception exception) {
             // debug only: being offline is not worth a stack trace in every log.
             // The one line that says the check failed comes from whoever asked
-            SmallShipsAddonMod.LOGGER.debug("Could not read {}: {}", url, exception.toString());
+            SmallShipsVikingAddonMod.LOGGER.debug("Could not read {}: {}", url, exception.toString());
             return new Result(Status.FAILED, currentVersion, null, DEFAULT_HOMEPAGE);
         }
     }

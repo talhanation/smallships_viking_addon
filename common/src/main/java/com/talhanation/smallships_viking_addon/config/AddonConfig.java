@@ -2,7 +2,7 @@ package com.talhanation.smallships_viking_addon.config;
 
 import com.talhanation.smallships.config.SmallShipsConfig;
 import com.talhanation.smallships.world.entity.ship.Ship;
-import com.talhanation.smallships_viking_addon.SmallShipsAddonMod;
+import com.talhanation.smallships_viking_addon.SmallShipsVikingAddonMod;
 import net.minecraftforge.common.ForgeConfigSpec;
 
 /**
@@ -62,7 +62,7 @@ public class AddonConfig {
 
         // maxHealth, maxSpeed, maxReverseSpeed, maxRotationSpeed, acceleration, rotationAcceleration
         // for comparison, the main mods' Drakkar: 200.0D, 28.0D, 0.1D, 5.0D, 0.010D, 0.750D
-        knarrAttributes = SmallShipsConfig.defineAttributes(builder, SmallShipsAddonMod.MOD_ID + "ShipAttributeKnarr",
+        knarrAttributes = SmallShipsConfig.defineAttributes(builder, SmallShipsVikingAddonMod.MOD_ID + "ShipAttributeKnarr",
                 100.0D, 24.0D, 0.1D, 4.5D, 0.008D, 0.650D);
 
         builder.pop();
@@ -92,7 +92,7 @@ public class AddonConfig {
         builder.comment("Default attributes for the Longship. Speed in km/h, Health in default mc health points");
         builder.push("Attributes");
 
-        longshipAttributes = SmallShipsConfig.defineAttributes(builder, SmallShipsAddonMod.MOD_ID + "ShipAttributeLongship",
+        longshipAttributes = SmallShipsConfig.defineAttributes(builder, SmallShipsVikingAddonMod.MOD_ID + "ShipAttributeLongship",
                 260.0D, 28.0D, 0.1D, 4.0D, 0.010D, 0.650D);
 
         builder.pop();
@@ -122,7 +122,7 @@ public class AddonConfig {
         builder.comment("Default attributes for the Transport Drakkar. Speed in km/h, Health in default mc health points");
         builder.push("Attributes");
 
-        transportDrakkarAttributes = SmallShipsConfig.defineAttributes(builder, SmallShipsAddonMod.MOD_ID + "ShipAttributeTransportDrakkar",
+        transportDrakkarAttributes = SmallShipsConfig.defineAttributes(builder, SmallShipsVikingAddonMod.MOD_ID + "ShipAttributeTransportDrakkar",
                 240.0D, 20.0D, 0.1D, 3.0D, 0.007D, 0.500D);
 
         builder.pop();
@@ -173,7 +173,7 @@ public class AddonConfig {
 
     /** Registers the specs. Must run before anything reads a value from them. */
     public static void register() {
-        SmallShipsConfig.registerConfigs(SmallShipsAddonMod.MOD_ID, SmallShipsConfig.ModConfigWrapper.Type.SERVER, SERVER_SPEC);
-        SmallShipsConfig.registerConfigs(SmallShipsAddonMod.MOD_ID, SmallShipsConfig.ModConfigWrapper.Type.CLIENT, CLIENT_SPEC);
+        SmallShipsConfig.registerConfigs(SmallShipsVikingAddonMod.MOD_ID, SmallShipsConfig.ModConfigWrapper.Type.SERVER, SERVER_SPEC);
+        SmallShipsConfig.registerConfigs(SmallShipsVikingAddonMod.MOD_ID, SmallShipsConfig.ModConfigWrapper.Type.CLIENT, CLIENT_SPEC);
     }
 }

@@ -8,16 +8,12 @@ import com.talhanation.smallships.world.entity.ship.hitbox.ShipPartEntity;
 import com.talhanation.smallships.world.entity.ship.seat.ShipSeat;
 import com.talhanation.smallships_viking_addon.config.AddonConfig;
 import com.talhanation.smallships_viking_addon.world.entity.AddonEntityTypes;
-import com.talhanation.smallships_viking_addon.world.item.AddonItems;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.vehicle.Boat;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
@@ -32,7 +28,7 @@ import java.util.Map;
  * the render height are still the ones of the Drakkar and have to follow the
  * Knarr model.
  */
-public class KnarrEntity extends ContainerShip implements Bannerable, Sailable, Shieldable, Paddleable, IceBreakable, Seatable, Leashable, Ability {
+public class KnarrEntity extends ContainerShip implements Bannerable, Sailable, IceBreakable, Seatable, Leashable, Ability {
     // registry path of the entity, the items and the dockyard recipe
     public static final String ID = "knarr";
 
@@ -74,13 +70,6 @@ public class KnarrEntity extends ContainerShip implements Bannerable, Sailable, 
     }
 
     @Override
-    public @NotNull Item getDropItem() {
-        // respect the main mods' item drop switch
-        if (!SmallShipsConfig.Server.shipGeneralDoItemDrop.get()) return ItemStack.EMPTY.getItem();
-        return AddonItems.KNARR_ITEMS.get(this.getVariant());
-    }
-
-    @Override
     public BiomeModifierType getBiomeModifierType() {
         return AddonConfig.knarrBiome.get();
     }
@@ -89,15 +78,11 @@ public class KnarrEntity extends ContainerShip implements Bannerable, Sailable, 
     // hitbox parts along the keel: hull(v, y, h, width, height), mast(v, h, thickness, height);
     // v = forward (positive = bow), h = sideways. Masts also define how many sails the ship has.
     private static final List<ShipPartEntity.Definition> PARTS = List.of(
-            ShipPartEntity.Definition.hull(-2.3F, 0.0F, 0.0F, 2.8F, 1.6F),//back
-            ShipPartEntity.Definition.hull(2.65F, 0.0F, 0.0F, 2.5F, 1.6F),//front
-            ShipPartEntity.Definition.hull(0.0F, 0.0F, 0.0F, 3.00F, 1.6F),//center
-            ShipPartEntity.Definition.hull(3.80F, 0.0F, 0.0F, 2.5F, 1.6F),//front ram
-
-            ShipPartEntity.Definition.hull(4.75F, 1.5F, 0.0F, 0.75F, 3.0F),//dragon head
-            ShipPartEntity.Definition.hull(-3.5F, 1.5F, 0.0F, 0.75F, 3.0F),//dragon tail
-
-            ShipPartEntity.Definition.mast(-0.1F, 0.0F, 0.3F, 9.0F)//mast
+            ShipPartEntity.Definition.hull(-2.3F, 0.0F, 0.0F, 1.8F, 1.25F),//back
+            ShipPartEntity.Definition.hull(2.65F, 0.0F, 0.0F, 1.8F, 1.25F),//front
+            ShipPartEntity.Definition.hull(-1.0F, 0.0F, 0.0F, 2.5F, 1.25F),//center back
+            ShipPartEntity.Definition.hull(1.0F, 0.0F, 0.0F, 2.5F, 1.25F),//center front
+            ShipPartEntity.Definition.mast(0.0F, 0.0F, 0.3F, 9.0F)//mast
     );
 
     @Override
@@ -179,13 +164,6 @@ public class KnarrEntity extends ContainerShip implements Bannerable, Sailable, 
         return 1.40F;
     }
 
-    /* ---------------- Oars ---------------- */
-    // the fraction of max speed the ship still makes with furled sails
-    @Override
-    public float getOarFactor() {
-        return 0.65F;
-    }
-
     /* ---------------- Leash ---------------- */
 
     @Override
@@ -193,33 +171,10 @@ public class KnarrEntity extends ContainerShip implements Bannerable, Sailable, 
         return new Vec3(0.0, this.getEyeHeight(), this.getBbWidth() * 0.1F);
     }
 
-    /* ---------------- Shields ---------------- */
-    // shield slots along the railing: (x, y, z, isRightSided)
-    @Override
-    public ShieldPosition getShieldPosition(int index) {
-        return SHIELD_POSITIONS.get(index);
-    }
-
-    @Override
-    public byte getMaxShieldsPerSide() {
-        return 3;
-    }
-
-    private static final List<ShieldPosition> SHIELD_POSITIONS = new ArrayList<>();
-
-    static {
-        SHIELD_POSITIONS.add(new ShieldPosition(2.1, 0.8, -1.0, true));
-        SHIELD_POSITIONS.add(new ShieldPosition(2.1, 0.8, 1.0, false));
-        SHIELD_POSITIONS.add(new ShieldPosition(0.9, 0.8, -1.2, true));
-        SHIELD_POSITIONS.add(new ShieldPosition(0.9, 0.8, 1.2, false));
-        SHIELD_POSITIONS.add(new ShieldPosition(-0.3, 0.8, -1.2, true));
-        SHIELD_POSITIONS.add(new ShieldPosition(-0.3, 0.8, 1.2, false));
-    }
-
     /* ---------------- Render ---------------- */
     // height of the render pose above the ship position, the renderer translates by it
     @Override
     public float getRenderPoseHeight() {
-        return 3.1F;
+        return 2.75F;
     }
 }

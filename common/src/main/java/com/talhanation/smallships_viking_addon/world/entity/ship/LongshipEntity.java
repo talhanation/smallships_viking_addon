@@ -8,16 +8,12 @@ import com.talhanation.smallships.world.entity.ship.hitbox.ShipPartEntity;
 import com.talhanation.smallships.world.entity.ship.seat.ShipSeat;
 import com.talhanation.smallships_viking_addon.config.AddonConfig;
 import com.talhanation.smallships_viking_addon.world.entity.AddonEntityTypes;
-import com.talhanation.smallships_viking_addon.world.item.AddonItems;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.vehicle.Boat;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
@@ -74,13 +70,6 @@ public class LongshipEntity extends ContainerShip implements Bannerable, Sailabl
     }
 
     @Override
-    public @NotNull Item getDropItem() {
-        // respect the main mods' item drop switch
-        if (!SmallShipsConfig.Server.shipGeneralDoItemDrop.get()) return ItemStack.EMPTY.getItem();
-        return AddonItems.LONGSHIP_ITEMS.get(this.getVariant());
-    }
-
-    @Override
     public BiomeModifierType getBiomeModifierType() {
         return AddonConfig.longshipBiome.get();
     }
@@ -89,15 +78,19 @@ public class LongshipEntity extends ContainerShip implements Bannerable, Sailabl
     // hitbox parts along the keel: hull(v, y, h, width, height), mast(v, h, thickness, height);
     // v = forward (positive = bow), h = sideways. Masts also define how many sails the ship has.
     private static final List<ShipPartEntity.Definition> PARTS = List.of(
-            ShipPartEntity.Definition.hull(-2.3F, 0.0F, 0.0F, 2.8F, 1.6F),//back
-            ShipPartEntity.Definition.hull(2.65F, 0.0F, 0.0F, 2.5F, 1.6F),//front
-            ShipPartEntity.Definition.hull(0.0F, 0.0F, 0.0F, 3.00F, 1.6F),//center
-            ShipPartEntity.Definition.hull(3.80F, 0.0F, 0.0F, 2.5F, 1.6F),//front ram
+            ShipPartEntity.Definition.hull(-4.0F, 0.0F, 0.0F, 2.0F, 1.25F),//back
+            ShipPartEntity.Definition.hull(4.0F, 0.0F, 0.0F, 2.0F, 1.25F),//front
 
-            ShipPartEntity.Definition.hull(4.75F, 1.5F, 0.0F, 0.75F, 3.0F),//dragon head
-            ShipPartEntity.Definition.hull(-3.5F, 1.5F, 0.0F, 0.75F, 3.0F),//dragon tail
+            ShipPartEntity.Definition.hull(-2.0F, 0.0F, 0.0F, 2.75F, 1.25F),//center back
 
-            ShipPartEntity.Definition.mast(-0.1F, 0.0F, 0.3F, 9.0F)//mast
+            ShipPartEntity.Definition.hull(0.0F, 0.0F, 0.0F, 2.75F, 1.25F),//center
+
+            ShipPartEntity.Definition.hull(2.0F, 0.0F, 0.0F, 2.75F, 1.25F),//center front
+
+            ShipPartEntity.Definition.hull(5.3F, 0.5F, 0.0F, 0.75F, 4.0F),//dragon head
+            ShipPartEntity.Definition.hull(-5.3F, 0.5F, 0.0F, 0.75F, 4.0F),//dragon tail
+
+            ShipPartEntity.Definition.mast(0.0F, 0.0F, 0.3F, 9.0F)//mast
     );
 
     @Override
@@ -222,7 +215,7 @@ public class LongshipEntity extends ContainerShip implements Bannerable, Sailabl
 
     @Override
     public byte getMaxShieldsPerSide() {
-        return 5;
+        return 7;
     }
 
     private static final List<ShieldPosition> SHIELD_POSITIONS = new ArrayList<>();
@@ -244,6 +237,6 @@ public class LongshipEntity extends ContainerShip implements Bannerable, Sailabl
     // height of the render pose above the ship position, the renderer translates by it
     @Override
     public float getRenderPoseHeight() {
-        return 3.1F;
+        return 2.75F;
     }
 }
