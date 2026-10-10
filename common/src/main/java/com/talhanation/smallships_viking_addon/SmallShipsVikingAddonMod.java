@@ -1,6 +1,6 @@
 package com.talhanation.smallships_viking_addon;
 
-import com.talhanation.smallships_viking_addon.config.AddonConfig;
+import com.talhanation.smallships_viking_addon.config.VikingAddonConfig;
 import com.talhanation.smallships_viking_addon.world.entity.AddonEntityTypes;
 import com.talhanation.smallships_viking_addon.world.entity.ship.AddonShipTypes;
 import org.slf4j.Logger;
@@ -16,7 +16,7 @@ public class SmallShipsVikingAddonMod {
     public static final Logger LOGGER = LoggerFactory.getLogger(SmallShipsVikingAddonMod.MOD_ID);
     public SmallShipsVikingAddonMod() {
         // the config spec has to exist before anything reads a value from it
-        AddonConfig.register();
+        VikingAddonConfig.register();
     }
 
     /**

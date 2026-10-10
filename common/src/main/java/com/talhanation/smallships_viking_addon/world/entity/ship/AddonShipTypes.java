@@ -19,7 +19,7 @@ public class AddonShipTypes {
 
     public static final ShipType KNARR = ShipRegistry.register(ShipType.builder(id(KnarrEntity.ID), KnarrEntity::summon)
             .buildTime(70 * 20)
-            .ingredient(ItemTags.PLANKS, 56)
+            .ingredient(ItemTags.PLANKS, 66)
             .ingredient(Items.WHITE_WOOL, 16)
             .ingredient(Items.STRING, 10)
             .ingredient(Items.IRON_NUGGET, 9)
@@ -34,10 +34,10 @@ public class AddonShipTypes {
             .build());
 
     public static final ShipType TRANSPORT_DRAKKAR = ShipRegistry.register(ShipType.builder(id(TransportDrakkarEntity.ID), TransportDrakkarEntity::summon)
-            .buildTime(165 * 20)
-            .ingredient(ItemTags.PLANKS, 148)
-            .ingredient(Items.WHITE_WOOL, 28)
-            .ingredient(Items.STRING, 24)
+            .buildTime(200 * 20)
+            .ingredient(ItemTags.PLANKS, 180)
+            .ingredient(Items.WHITE_WOOL, 42)
+            .ingredient(Items.STRING, 34)
             .ingredient(Items.IRON_NUGGET, 27)
             .build());
 

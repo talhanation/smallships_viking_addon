@@ -22,7 +22,7 @@ import net.minecraftforge.common.ForgeConfigSpec;
  * The client spec only holds what is the players' own choice: whether the
  * update check tells him in chat that a new version is out.
  */
-public class AddonConfig {
+public class VikingAddonConfig {
 
     public static final ForgeConfigSpec SERVER_SPEC;
     public static final ForgeConfigSpec CLIENT_SPEC;
@@ -72,7 +72,7 @@ public class AddonConfig {
 
         builder.comment("Set container size for the Knarr (value must be divisible by 9 and bigger than 0).");
         knarrContainerSize = builder
-                .define("knarrContainerSize", 27, e -> e instanceof Integer i && i % 9 == 0 && i > 0);
+                .define("knarrContainerSize", 54, e -> e instanceof Integer i && i % 9 == 0 && i > 0);
 
         builder.pop();
 
@@ -102,7 +102,7 @@ public class AddonConfig {
 
         builder.comment("Set container size for the Longship (value must be divisible by 9 and bigger than 0).");
         longshipContainerSize = builder
-                .define("longshipContainerSize", 54, e -> e instanceof Integer i && i % 9 == 0 && i > 0);
+                .define("longshipContainerSize", 27*3, e -> e instanceof Integer i && i % 9 == 0 && i > 0);
 
         builder.pop();
 
@@ -132,7 +132,7 @@ public class AddonConfig {
 
         builder.comment("Set container size for the Transport Drakkar (value must be divisible by 9 and bigger than 0).");
         transportDrakkarContainerSize = builder
-                .define("transportDrakkarContainerSize", 54, e -> e instanceof Integer i && i % 9 == 0 && i > 0);
+                .define("transportDrakkarContainerSize", 54*3, e -> e instanceof Integer i && i % 9 == 0 && i > 0);
 
         builder.pop();
 

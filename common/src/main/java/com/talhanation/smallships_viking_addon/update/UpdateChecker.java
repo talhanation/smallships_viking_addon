@@ -3,7 +3,7 @@ package com.talhanation.smallships_viking_addon.update;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.talhanation.smallships_viking_addon.SmallShipsVikingAddonMod;
-import com.talhanation.smallships_viking_addon.config.AddonConfig;
+import com.talhanation.smallships_viking_addon.config.VikingAddonConfig;
 import dev.architectury.injectables.annotations.ExpectPlatform;
 import net.minecraft.SharedConstants;
 import org.jetbrains.annotations.Nullable;
@@ -105,7 +105,7 @@ public class UpdateChecker {
      * server config is not loaded before that.
      */
     public static void onServerStarted() {
-        if (!AddonConfig.updateCheckerEnable.get()) return;
+        if (!VikingAddonConfig.updateCheckerEnable.get()) return;
         check().thenAccept(checked -> {
             switch (checked.status()) {
                 case OUTDATED -> {

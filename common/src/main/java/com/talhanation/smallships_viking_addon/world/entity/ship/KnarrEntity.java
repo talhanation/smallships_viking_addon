@@ -6,7 +6,7 @@ import com.talhanation.smallships.world.entity.ship.ShipUpgrade;
 import com.talhanation.smallships.world.entity.ship.abilities.*;
 import com.talhanation.smallships.world.entity.ship.hitbox.ShipPartEntity;
 import com.talhanation.smallships.world.entity.ship.seat.ShipSeat;
-import com.talhanation.smallships_viking_addon.config.AddonConfig;
+import com.talhanation.smallships_viking_addon.config.VikingAddonConfig;
 import com.talhanation.smallships_viking_addon.world.entity.AddonEntityTypes;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.util.Mth;
@@ -16,7 +16,6 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -39,7 +38,7 @@ public class KnarrEntity extends ContainerShip implements Bannerable, Sailable, 
             ShipUpgrade.COPPER_PLATING, 3
     );
 
-    private static final int ORIGINAL_CONTAINER_SIZE = AddonConfig.knarrContainerSize.get();
+    private static final int ORIGINAL_CONTAINER_SIZE = VikingAddonConfig.knarrContainerSize.get();
 
     public KnarrEntity(EntityType<? extends Boat> entityType, Level level) {
         super(entityType, level, ORIGINAL_CONTAINER_SIZE);
@@ -66,12 +65,12 @@ public class KnarrEntity extends ContainerShip implements Bannerable, Sailable, 
     // defined via SmallShipsConfig#defineAttributes, so the values are synced from the server
     @Override
     public SmallShipsConfig.ShipAttributes getConfiguredAttributes() {
-        return AddonConfig.knarrAttributes;
+        return VikingAddonConfig.knarrAttributes;
     }
 
     @Override
     public BiomeModifierType getBiomeModifierType() {
-        return AddonConfig.knarrBiome.get();
+        return VikingAddonConfig.knarrBiome.get();
     }
 
     /* ---------------- collision parts ---------------- */
@@ -94,18 +93,21 @@ public class KnarrEntity extends ContainerShip implements Bannerable, Sailable, 
 
     // seats: driver/passenger(id, v, y, h) - ids must be unique, y is on top of the deck
     // 7 seats: the helm and three rows of two
-    private static final float deck = 0.4F;
+    private static final float deck = 0.1F;
     private static final List<ShipSeat> SEATS = List.of(
-            ShipSeat.driver(0, -2.8F, deck, 0.0F),
+            ShipSeat.driver(0, -2.3F, deck, 0.0F),
 
-            ShipSeat.passenger(1, -2.2F, deck, 0.75F),
-            ShipSeat.passenger(2, -2.2F, deck, -0.75F),
+            ShipSeat.passenger(1, -1.0F, deck, 0.75F),
+            ShipSeat.passenger(2, -1.0F, deck, -0.75F),
 
-            ShipSeat.passenger(3, -1.2F, deck, 0.75F),
-            ShipSeat.passenger(4, -1.2F, deck, -0.75F),
+            ShipSeat.passenger(3, -0.0F, deck, 0.75F),
+            ShipSeat.passenger(4, -0.0F, deck, -0.75F),
 
-            ShipSeat.passenger(5, -0.2F, deck, 0.75F),
-            ShipSeat.passenger(6, -0.2F, deck, -0.75F)
+            ShipSeat.passenger(5, 1.0F, deck, 0.75F),
+            ShipSeat.passenger(6, 1.0F, deck, -0.75F),
+
+            ShipSeat.passenger(7, 2.0F, deck, 0.5F),
+            ShipSeat.passenger(8, 2.0F, deck, -0.5F)
     );
 
     @Override

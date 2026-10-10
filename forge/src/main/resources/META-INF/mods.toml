@@ -8,11 +8,13 @@ version = "${version}"
 displayName = "SmallShips Viking Addon"
 description = '''Viking Addon for SmallShips: adds the Knarr, the Longship and the Transport Drakkar.'''
 
+logoFile = "icon.png"
+
 # the addon needs the main mod to be there BEFORE it registers its ship type
 [[dependencies.smallships_viking_addon]]
 modId = "smallships"
 mandatory = true
-versionRange = "[2.0.0,)"
+versionRange = "[2.0.1,)"
 ordering = "AFTER"
 side = "BOTH"
 

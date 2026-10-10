@@ -6,7 +6,7 @@ import com.talhanation.smallships.world.entity.ship.ShipUpgrade;
 import com.talhanation.smallships.world.entity.ship.abilities.*;
 import com.talhanation.smallships.world.entity.ship.hitbox.ShipPartEntity;
 import com.talhanation.smallships.world.entity.ship.seat.ShipSeat;
-import com.talhanation.smallships_viking_addon.config.AddonConfig;
+import com.talhanation.smallships_viking_addon.config.VikingAddonConfig;
 import com.talhanation.smallships_viking_addon.world.entity.AddonEntityTypes;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.util.Mth;
@@ -24,9 +24,8 @@ import java.util.Map;
  * Longship - slightly better than the Drakkar: more health and 20 seats at
  * the same speed, paid for with a worse rotation.
  *
- * Built after the main mods' DrakkarEntity. Hull parts, shield positions and
- * the render height are still the ones of the Drakkar and have to follow the
- * Longship model.
+ * Built after the main mods' DrakkarEntity. Hull parts and the render height
+ * are still the ones of the Drakkar and have to follow the Longship model.
  */
 public class LongshipEntity extends ContainerShip implements Bannerable, Sailable, Shieldable, Paddleable, IceBreakable, Seatable, Leashable, Ability {
     // registry path of the entity, the items and the dockyard recipe
@@ -39,7 +38,7 @@ public class LongshipEntity extends ContainerShip implements Bannerable, Sailabl
             ShipUpgrade.COPPER_PLATING, 6
     );
 
-    private static final int ORIGINAL_CONTAINER_SIZE = AddonConfig.longshipContainerSize.get();
+    private static final int ORIGINAL_CONTAINER_SIZE = VikingAddonConfig.longshipContainerSize.get();
 
     public LongshipEntity(EntityType<? extends Boat> entityType, Level level) {
         super(entityType, level, ORIGINAL_CONTAINER_SIZE);
@@ -66,17 +65,13 @@ public class LongshipEntity extends ContainerShip implements Bannerable, Sailabl
     // defined via SmallShipsConfig#defineAttributes, so the values are synced from the server
     @Override
     public SmallShipsConfig.ShipAttributes getConfiguredAttributes() {
-        return AddonConfig.longshipAttributes;
+        return VikingAddonConfig.longshipAttributes;
     }
 
     @Override
     public BiomeModifierType getBiomeModifierType() {
-        return AddonConfig.longshipBiome.get();
+        return VikingAddonConfig.longshipBiome.get();
     }
-
-    /* ---------------- collision parts ---------------- */
-    // hitbox parts along the keel: hull(v, y, h, width, height), mast(v, h, thickness, height);
-    // v = forward (positive = bow), h = sideways. Masts also define how many sails the ship has.
     private static final List<ShipPartEntity.Definition> PARTS = List.of(
             ShipPartEntity.Definition.hull(-4.0F, 0.0F, 0.0F, 2.0F, 1.25F),//back
             ShipPartEntity.Definition.hull(4.0F, 0.0F, 0.0F, 2.0F, 1.25F),//front
@@ -98,42 +93,38 @@ public class LongshipEntity extends ContainerShip implements Bannerable, Sailabl
         return PARTS;
     }
 
-    /* ---------------- seats ---------------- */
-
-    // seats: driver/passenger(id, v, y, h) - ids must be unique, y is on top of the deck
-    // 20 seats: the helm, nine rows of two and one in the bow
-    private static final float deck = 0.4F;
+    private static final float deck = 0.1F;
     private static final List<ShipSeat> SEATS = List.of(
-            ShipSeat.driver(0, -2.8F, deck, 0.0F),
+            ShipSeat.driver(0, -4.0F, deck, 0.0F),
 
-            ShipSeat.passenger(1, -2.2F, deck, 0.75F),
-            ShipSeat.passenger(2, -2.2F, deck, -0.75F),
+            ShipSeat.passenger(1, -3.25F, deck, 0.75F),
+            ShipSeat.passenger(2, -3.25F, deck, -0.75F),
 
-            ShipSeat.passenger(3, -1.4F, deck, 0.75F),
-            ShipSeat.passenger(4, -1.4F, deck, -0.75F),
+            ShipSeat.passenger(3, -2.5F, deck, 0.75F),
+            ShipSeat.passenger(4, -2.5F, deck, -0.75F),
 
-            ShipSeat.passenger(5, -0.6F, deck, 0.75F),
-            ShipSeat.passenger(6, -0.6F, deck, -0.75F),
+            ShipSeat.passenger(5, -1.75F, deck, 0.75F),
+            ShipSeat.passenger(6, -1.75F, deck, -0.75F),
 
-            ShipSeat.passenger(7, 0.2F, deck, 0.75F),
-            ShipSeat.passenger(8, 0.2F, deck, -0.75F),
+            ShipSeat.passenger(7, -1.0F, deck, 0.75F),
+            ShipSeat.passenger(8, -1.0F, deck, -0.75F),
 
-            ShipSeat.passenger(9, 1.0F, deck, 0.75F),
-            ShipSeat.passenger(10, 1.0F, deck, -0.75F),
+            ShipSeat.passenger(9, -0.25F, deck, 0.75F),
+            ShipSeat.passenger(10, -0.25F, deck, -0.75F),
 
-            ShipSeat.passenger(11, 1.8F, deck, 0.75F),
-            ShipSeat.passenger(12, 1.8F, deck, -0.75F),
+            ShipSeat.passenger(11, 0.5F, deck, 0.75F),
+            ShipSeat.passenger(12, 0.5F, deck, -0.75F),
 
-            ShipSeat.passenger(13, 2.6F, deck, 0.75F),
-            ShipSeat.passenger(14, 2.6F, deck, -0.75F),
+            ShipSeat.passenger(13, 1.25F, deck, 0.75F),
+            ShipSeat.passenger(14, 1.25F, deck, -0.75F),
 
-            ShipSeat.passenger(15, 3.4F, deck, 0.75F),
-            ShipSeat.passenger(16, 3.4F, deck, -0.75F),
+            ShipSeat.passenger(15, 2.0F, deck, 0.75F),
+            ShipSeat.passenger(16, 2.0F, deck, -0.75F),
 
-            ShipSeat.passenger(17, 4.2F, deck, 0.75F),
-            ShipSeat.passenger(18, 4.2F, deck, -0.75F),
+            ShipSeat.passenger(17, 2.75F, deck, 0.75F),
+            ShipSeat.passenger(18, 2.75F, deck, -0.75F),
 
-            ShipSeat.passenger(19, 4.6F, deck, 0.0F)
+            ShipSeat.passenger(19, 3.5F, deck, 0.0F)
     );
 
     @Override
@@ -220,17 +211,24 @@ public class LongshipEntity extends ContainerShip implements Bannerable, Sailabl
 
     private static final List<ShieldPosition> SHIELD_POSITIONS = new ArrayList<>();
 
+    // 6 oars = 5 gaps: the first five pairs hang halfway between two oars (oar x of the model / 16),
+    // the last two pairs hang behind the outermost oars at the tail and at the bow
     static {
-        SHIELD_POSITIONS.add(new ShieldPosition(2.1, 0.8, -1.0, true));
-        SHIELD_POSITIONS.add(new ShieldPosition(2.1, 0.8, 1.0, false));
-        SHIELD_POSITIONS.add(new ShieldPosition(0.9, 0.8, -1.2, true));
-        SHIELD_POSITIONS.add(new ShieldPosition(0.9, 0.8, 1.2, false));
-        SHIELD_POSITIONS.add(new ShieldPosition(-0.3, 0.8, -1.2, true));
-        SHIELD_POSITIONS.add(new ShieldPosition(-0.3, 0.8, 1.2, false));
-        SHIELD_POSITIONS.add(new ShieldPosition(-1.5, 0.8, -1.2, true));
-        SHIELD_POSITIONS.add(new ShieldPosition(-1.5, 0.8, 1.2, false));
-        SHIELD_POSITIONS.add(new ShieldPosition(-3.0, 0.8, -1.0, true));
-        SHIELD_POSITIONS.add(new ShieldPosition(-3.0, 0.8, 1.0, false));
+        SHIELD_POSITIONS.add(new ShieldPosition(2.06, 0.8, -1.2, true));
+        SHIELD_POSITIONS.add(new ShieldPosition(2.06, 0.8, 1.2, false));
+        SHIELD_POSITIONS.add(new ShieldPosition(0.88, 0.8, -1.2, true));
+        SHIELD_POSITIONS.add(new ShieldPosition(0.88, 0.8, 1.2, false));
+        SHIELD_POSITIONS.add(new ShieldPosition(-0.28, 0.8, -1.2, true));
+        SHIELD_POSITIONS.add(new ShieldPosition(-0.28, 0.8, 1.2, false));
+        SHIELD_POSITIONS.add(new ShieldPosition(-1.41, 0.8, -1.2, true));
+        SHIELD_POSITIONS.add(new ShieldPosition(-1.41, 0.8, 1.2, false));
+        SHIELD_POSITIONS.add(new ShieldPosition(-2.53, 0.8, -1.2, true));
+        SHIELD_POSITIONS.add(new ShieldPosition(-2.53, 0.8, 1.2, false));
+
+        SHIELD_POSITIONS.add(new ShieldPosition(3.2, 0.8, -0.8, true));
+        SHIELD_POSITIONS.add(new ShieldPosition(3.2, 0.8, 0.8, false));
+        SHIELD_POSITIONS.add(new ShieldPosition(-3.4, 0.8, -0.8, true));
+        SHIELD_POSITIONS.add(new ShieldPosition(-3.4, 0.8, 0.8, false));
     }
 
     /* ---------------- Render ---------------- */

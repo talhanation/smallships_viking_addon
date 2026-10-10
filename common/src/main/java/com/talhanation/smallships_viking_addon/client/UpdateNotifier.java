@@ -1,7 +1,7 @@
 package com.talhanation.smallships_viking_addon.client;
 
 import com.talhanation.smallships_viking_addon.SmallShipsVikingAddonMod;
-import com.talhanation.smallships_viking_addon.config.AddonConfig;
+import com.talhanation.smallships_viking_addon.config.VikingAddonConfig;
 import com.talhanation.smallships_viking_addon.update.UpdateChecker;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
@@ -32,7 +32,7 @@ public class UpdateNotifier {
     }
 
     private static void onJoinWorld(Minecraft minecraft) {
-        if (!AddonConfig.clientUpdateCheckerEnable.get()) return;
+        if (!VikingAddonConfig.clientUpdateCheckerEnable.get()) return;
         // the result arrives on the fetch thread, the chat belongs to the
         // client thread - and by then the player may have left again
         UpdateChecker.check().thenAccept(result -> minecraft.execute(() -> {

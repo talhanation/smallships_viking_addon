@@ -5,6 +5,7 @@
   "name": "SmallShips Viking Addon",
   "description": "Viking addon for SmallShips: adds the Knarr, the Longship and the Transport Drakkar.",
   "license": "All Rights Reserved",
+  "icon": "icon.png",
   "environment": "*",
   "entrypoints": {
     "main": [

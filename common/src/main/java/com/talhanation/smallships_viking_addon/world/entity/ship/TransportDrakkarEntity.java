@@ -6,7 +6,7 @@ import com.talhanation.smallships.world.entity.ship.ShipUpgrade;
 import com.talhanation.smallships.world.entity.ship.abilities.*;
 import com.talhanation.smallships.world.entity.ship.hitbox.ShipPartEntity;
 import com.talhanation.smallships.world.entity.ship.seat.ShipSeat;
-import com.talhanation.smallships_viking_addon.config.AddonConfig;
+import com.talhanation.smallships_viking_addon.config.VikingAddonConfig;
 import com.talhanation.smallships_viking_addon.world.entity.AddonEntityTypes;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.util.Mth;
@@ -24,9 +24,9 @@ import java.util.Map;
  * Transport Drakkar - the troop carrier of the Viking ships: 30 seats, and for
  * that the slowest ship with the worst rotation.
  *
- * Built after the main mods' DrakkarEntity. Hull parts, shield positions and
- * the render height are still the ones of the Drakkar and have to follow the
- * Transport Drakkar model.
+ * Built after the main mods' DrakkarEntity. Hull parts and the render height
+ * are still the ones of the Drakkar and have to follow the Transport Drakkar
+ * model.
  */
 public class TransportDrakkarEntity extends ContainerShip implements Bannerable, Sailable, Shieldable, Paddleable, IceBreakable, Seatable, Leashable, Ability {
     // registry path of the entity, the items and the dockyard recipe
@@ -39,7 +39,7 @@ public class TransportDrakkarEntity extends ContainerShip implements Bannerable,
             ShipUpgrade.COPPER_PLATING, 7
     );
 
-    private static final int ORIGINAL_CONTAINER_SIZE = AddonConfig.transportDrakkarContainerSize.get();
+    private static final int ORIGINAL_CONTAINER_SIZE = VikingAddonConfig.transportDrakkarContainerSize.get();
 
     public TransportDrakkarEntity(EntityType<? extends Boat> entityType, Level level) {
         super(entityType, level, ORIGINAL_CONTAINER_SIZE);
@@ -66,12 +66,12 @@ public class TransportDrakkarEntity extends ContainerShip implements Bannerable,
     // defined via SmallShipsConfig#defineAttributes, so the values are synced from the server
     @Override
     public SmallShipsConfig.ShipAttributes getConfiguredAttributes() {
-        return AddonConfig.transportDrakkarAttributes;
+        return VikingAddonConfig.transportDrakkarAttributes;
     }
 
     @Override
     public BiomeModifierType getBiomeModifierType() {
-        return AddonConfig.transportDrakkarBiome.get();
+        return VikingAddonConfig.transportDrakkarBiome.get();
     }
 
     /* ---------------- collision parts ---------------- */
@@ -102,7 +102,7 @@ public class TransportDrakkarEntity extends ContainerShip implements Bannerable,
 
     // seats: driver/passenger(id, v, y, h) - ids must be unique, y is on top of the deck
     // 30 seats: the helm, nine rows of three and two in the bow
-    private static final float deck = 0.2F;
+    private static final float deck = 0.1F;
     private static final List<ShipSeat> SEATS = List.of(
             ShipSeat.driver(0, -4.5F, deck, 0.5F),
             ShipSeat.passenger(1, -4.5F, deck, -0.5F),
@@ -228,32 +228,40 @@ public class TransportDrakkarEntity extends ContainerShip implements Bannerable,
 
     @Override
     public byte getMaxShieldsPerSide() {
-        return 7;
+        return 9;
     }
 
     private static final List<ShieldPosition> SHIELD_POSITIONS = new ArrayList<>();
 
+    // the first seven pairs hang halfway between two oars (oar x of the model / 16), 8 oars = 7 gaps,
+    // the last two pairs hang behind the outermost oars at the tail and at the bow
     static {
-        SHIELD_POSITIONS.add(new ShieldPosition(3.6, 0.8, -1.5, true));
-        SHIELD_POSITIONS.add(new ShieldPosition(3.6, 0.8, 1.5, false));
+        SHIELD_POSITIONS.add(new ShieldPosition(2.26, 0.8, -1.7, true));
+        SHIELD_POSITIONS.add(new ShieldPosition(2.26, 0.8, 1.7, false));
 
-        SHIELD_POSITIONS.add(new ShieldPosition(2.1, 0.8, -1.7, true));
-        SHIELD_POSITIONS.add(new ShieldPosition(2.1, 0.8, 1.7, false));
+        SHIELD_POSITIONS.add(new ShieldPosition(1.32, 0.8, -1.7, true));
+        SHIELD_POSITIONS.add(new ShieldPosition(1.32, 0.8, 1.7, false));
 
-        SHIELD_POSITIONS.add(new ShieldPosition(1.5, 0.8, -1.7, true));
-        SHIELD_POSITIONS.add(new ShieldPosition(1.5, 0.8, 1.7, false));
+        SHIELD_POSITIONS.add(new ShieldPosition(0.41, 0.8, -1.7, true));
+        SHIELD_POSITIONS.add(new ShieldPosition(0.41, 0.8, 1.7, false));
 
-        SHIELD_POSITIONS.add(new ShieldPosition(0.25, 0.8, -1.7, true));
-        SHIELD_POSITIONS.add(new ShieldPosition(0.25, 0.8, 1.7, false));
+        SHIELD_POSITIONS.add(new ShieldPosition(-0.46, 0.8, -1.7, true));
+        SHIELD_POSITIONS.add(new ShieldPosition(-0.46, 0.8, 1.7, false));
 
-        SHIELD_POSITIONS.add(new ShieldPosition(-1.25, 0.8, -1.7, true));
-        SHIELD_POSITIONS.add(new ShieldPosition(-1.25, 0.8, 1.7, false));
+        SHIELD_POSITIONS.add(new ShieldPosition(-1.37, 0.8, -1.7, true));
+        SHIELD_POSITIONS.add(new ShieldPosition(-1.37, 0.8, 1.7, false));
 
-        SHIELD_POSITIONS.add(new ShieldPosition(-2.25, 0.8, -1.7, true));
-        SHIELD_POSITIONS.add(new ShieldPosition(-2.25, 0.8, 1.7, false));
+        SHIELD_POSITIONS.add(new ShieldPosition(-2.27, 0.8, -1.7, true));
+        SHIELD_POSITIONS.add(new ShieldPosition(-2.27, 0.8, 1.7, false));
 
-        SHIELD_POSITIONS.add(new ShieldPosition(-3.25, 0.8, -1.5, true));
-        SHIELD_POSITIONS.add(new ShieldPosition(-3.25, 0.8, 1.5, false));
+        SHIELD_POSITIONS.add(new ShieldPosition(-3.15, 0.8, -1.6, true));
+        SHIELD_POSITIONS.add(new ShieldPosition(-3.15, 0.8, 1.6, false));
+
+        SHIELD_POSITIONS.add(new ShieldPosition(3.2, 0.8, -1.4, true));
+        SHIELD_POSITIONS.add(new ShieldPosition(3.2, 0.8, 1.4, false));
+
+        SHIELD_POSITIONS.add(new ShieldPosition(-4.05, 0.8, -1.4, true));
+        SHIELD_POSITIONS.add(new ShieldPosition(-4.05, 0.8, 1.4, false));
     }
 
     /* ---------------- Render ---------------- */
