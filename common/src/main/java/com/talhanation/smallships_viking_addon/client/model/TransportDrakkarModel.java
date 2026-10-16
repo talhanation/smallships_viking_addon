@@ -13,7 +13,7 @@ import net.minecraft.resources.ResourceLocation;
 import org.jetbrains.annotations.NotNull;
 
 public class TransportDrakkarModel extends ShipModel<TransportDrakkarEntity> {
-	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(new ResourceLocation(SmallShipsVikingAddonMod.MOD_ID, TransportDrakkarEntity.ID + "_model"), "main");
+	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(ResourceLocation.fromNamespaceAndPath(SmallShipsVikingAddonMod.MOD_ID, TransportDrakkarEntity.ID + "_model"), "main");
 	private final ModelPart DrakkarTransport;
 	private final ModelPart mast_1;
 	private final ModelPart deck;

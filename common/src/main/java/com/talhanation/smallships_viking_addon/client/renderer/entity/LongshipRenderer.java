@@ -30,7 +30,7 @@ public class LongshipRenderer extends ShipRenderer<LongshipEntity> {
     @Override
     protected ResourceLocation getTextureLocation(Boat.Type type) {
         // reuses the main mods' hull textures - use SmallShipsAddonMod.MOD_ID to ship your own
-        return new ResourceLocation(SmallShipsMod.MOD_ID, "textures/entity/ship/" + ShipRenderer.getNameFromType(type) + ".png");
+        return ResourceLocation.fromNamespaceAndPath(SmallShipsMod.MOD_ID, "textures/entity/ship/" + ShipRenderer.getNameFromType(type) + ".png");
     }
 
     @Override

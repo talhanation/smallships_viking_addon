@@ -14,7 +14,6 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.vehicle.Boat;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,7 +27,7 @@ import java.util.Map;
  * are still the ones of the Drakkar and have to follow the Transport Drakkar
  * model.
  */
-public class TransportDrakkarEntity extends ContainerShip implements Bannerable, Sailable, Shieldable, Paddleable, IceBreakable, Seatable, Leashable, Ability {
+public class TransportDrakkarEntity extends ContainerShip implements Bannerable, Sailable, Shieldable, Paddleable, IceBreakable, Seatable, Ability {
     // registry path of the entity, the items and the dockyard recipe
     public static final String ID = "transport_drakkar";
 
@@ -210,13 +209,6 @@ public class TransportDrakkarEntity extends ContainerShip implements Bannerable,
     @Override
     public float getOarFactor() {
         return 0.75F;
-    }
-
-    /* ---------------- Leash ---------------- */
-
-    @Override
-    public @Nullable Vec3 applyLeashOffset() {
-        return new Vec3(0.0, this.getEyeHeight(), this.getBbWidth() * 0.1F);
     }
 
     /* ---------------- Shields ---------------- */

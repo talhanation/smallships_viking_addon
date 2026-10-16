@@ -1,5 +1,5 @@
 plugins {
-    id "com.github.johnrengelman.shadow" version "7.1.2"
+    id "com.github.johnrengelman.shadow"
 }
 
 architectury {
@@ -12,11 +12,19 @@ loom {
 }
 
 configurations {
-    common
-    shadowCommon // Don't use shadow from the shadow plugin since it *excludes* files.
+    common {
+        canBeResolved = true
+        canBeConsumed = false
+    }
     compileClasspath.extendsFrom common
     runtimeClasspath.extendsFrom common
     developmentFabric.extendsFrom common
+
+    // Don't use shadow from the shadow plugin since it *excludes* files.
+    shadowCommon {
+        canBeResolved = true
+        canBeConsumed = false
+    }
 }
 
 repositories {
@@ -30,7 +38,8 @@ dependencies {
     modImplementation "net.fabricmc:fabric-loader:${rootProject.fabric_loader_version}"
     modApi "net.fabricmc.fabric-api:fabric-api:${rootProject.fabric_api_version}"
 
-    modImplementation "maven.modrinth:${rootProject.smallships_modrinth_id}:${rootProject.smallships_fabric_version}"
+    //modImplementation "maven.modrinth:${rootProject.smallships_modrinth_id}:${rootProject.smallships_fabric_version}"
+    modImplementation "com.talhanation:smallships-fabric-1.21.1:${rootProject.smallships_version}"
 
     modImplementation "com.terraformersmc:modmenu:${rootProject.modmenu_version}"
 //    modImplementation "curse.maven:configured-fabric-667378:4441611" //needs update

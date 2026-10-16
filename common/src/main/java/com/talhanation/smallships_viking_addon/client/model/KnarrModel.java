@@ -12,7 +12,7 @@ import net.minecraft.resources.ResourceLocation;
 import org.jetbrains.annotations.NotNull;
 
 public class KnarrModel extends ShipModel<KnarrEntity> {
-	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(new ResourceLocation(SmallShipsVikingAddonMod.MOD_ID, KnarrEntity.ID + "_model"), "main");
+	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(ResourceLocation.fromNamespaceAndPath(SmallShipsVikingAddonMod.MOD_ID, KnarrEntity.ID + "_model"), "main");
 	private final ModelPart Knarr;
 	private final ModelPart deck;
 	private final ModelPart cube_r1;

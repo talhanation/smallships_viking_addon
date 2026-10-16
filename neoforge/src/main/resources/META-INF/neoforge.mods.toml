@@ -1,0 +1,26 @@
+modLoader = "javafml"
+loaderVersion = "[4,)"
+license = "All Rights Reserved"
+
+[[mods]]
+modId = "smallships_viking_addon"
+version = "${version}"
+displayName = "SmallShips Viking Addon"
+description = '''Viking Addon for SmallShips: adds the Knarr, the Longship and the Transport Drakkar.'''
+
+logoFile = "icon.png"
+
+# the addon needs the main mod to be there BEFORE it registers its ship type
+[[dependencies.smallships_viking_addon]]
+modId = "smallships"
+type = "required"
+versionRange = "[2.0.1,)"
+ordering = "AFTER"
+side = "BOTH"
+
+[[dependencies.smallships_viking_addon]]
+modId = "minecraft"
+type = "required"
+versionRange = "[1.21.1]"
+ordering = "NONE"
+side = "BOTH"

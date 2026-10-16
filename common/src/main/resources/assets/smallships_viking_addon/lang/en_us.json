@@ -30,6 +30,12 @@
   "item.smallships_viking_addon.bamboo_knarr": "Bamboo Knarr",
   "item.smallships_viking_addon.bamboo_longship": "Bamboo Longship",
   "item.smallships_viking_addon.bamboo_transport_drakkar": "Bamboo Transport Drakkar",
+  "item.smallships_viking_addon.warped_knarr": "Warped Knarr",
+  "item.smallships_viking_addon.warped_longship": "Warped Longship",
+  "item.smallships_viking_addon.warped_transport_drakkar": "Warped Transport Drakkar",
+  "item.smallships_viking_addon.crimson_knarr": "Crimson Knarr",
+  "item.smallships_viking_addon.crimson_longship": "Crimson Longship",
+  "item.smallships_viking_addon.crimson_transport_drakkar": "Crimson Transport Drakkar",
 
 
   "gui.smallships.dockyard.about.smallships_viking_addon.knarr": "The knarr is a single-masted ship with a sail and oars. With the sail furled it can be rowed at about two thirds of its top speed in any wind. Under sail, a tail wind gives it a strong speed bonus, a side wind a small one. Up to six shields can be hung along its sides, three on each side, and every shield reduces the damage the ship takes. It breaks through regular ice. It sails faster in cold waters.",

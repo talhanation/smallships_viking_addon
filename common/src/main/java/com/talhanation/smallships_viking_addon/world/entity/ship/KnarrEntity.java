@@ -14,7 +14,6 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.vehicle.Boat;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 import java.util.Map;
@@ -27,7 +26,7 @@ import java.util.Map;
  * the render height are still the ones of the Drakkar and have to follow the
  * Knarr model.
  */
-public class KnarrEntity extends ContainerShip implements Bannerable, Sailable, IceBreakable, Seatable, Leashable, Ability {
+public class KnarrEntity extends ContainerShip implements Bannerable, Sailable, IceBreakable, Seatable, Ability {
     // registry path of the entity, the items and the dockyard recipe
     public static final String ID = "knarr";
 
@@ -164,13 +163,6 @@ public class KnarrEntity extends ContainerShip implements Bannerable, Sailable, 
     @Override
     public float getTailWindMultiplier() {
         return 1.40F;
-    }
-
-    /* ---------------- Leash ---------------- */
-
-    @Override
-    public @Nullable Vec3 applyLeashOffset() {
-        return new Vec3(0.0, this.getEyeHeight(), this.getBbWidth() * 0.1F);
     }
 
     /* ---------------- Render ---------------- */

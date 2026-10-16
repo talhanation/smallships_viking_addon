@@ -10,7 +10,7 @@ import net.minecraft.resources.ResourceLocation;
 
 public class TransportDrakkarMastBannerModel extends MastBannerModel {
     @SuppressWarnings("unused")
-    public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(new ResourceLocation(SmallShipsVikingAddonMod.MOD_ID, TransportDrakkarEntity.ID + "_mast_banner_model"), "main");
+    public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(ResourceLocation.fromNamespaceAndPath(SmallShipsVikingAddonMod.MOD_ID, TransportDrakkarEntity.ID + "_mast_banner_model"), "main");
 
     public TransportDrakkarMastBannerModel() {
         super(createBodyLayer());

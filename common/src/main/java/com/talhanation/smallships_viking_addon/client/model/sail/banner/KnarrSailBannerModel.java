@@ -18,7 +18,7 @@ import org.jetbrains.annotations.NotNull;
  */
 public class KnarrSailBannerModel extends SailBannerModel {
     @SuppressWarnings("unused")
-    public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(new ResourceLocation(SmallShipsVikingAddonMod.MOD_ID, KnarrEntity.ID + "_sail_banner_model"), "main");
+    public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(ResourceLocation.fromNamespaceAndPath(SmallShipsVikingAddonMod.MOD_ID, KnarrEntity.ID + "_sail_banner_model"), "main");
 
     public KnarrSailBannerModel() {
         super(createBodyLayer());

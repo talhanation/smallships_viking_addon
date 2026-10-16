@@ -15,7 +15,7 @@ import org.jetbrains.annotations.NotNull;
 
 public class LongshipSailModel extends SailModel {
 	@SuppressWarnings("unused")
-    public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(new ResourceLocation(SmallShipsVikingAddonMod.MOD_ID, LongshipEntity.ID + "_sail_model"), "main");
+    public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(ResourceLocation.fromNamespaceAndPath(SmallShipsVikingAddonMod.MOD_ID, LongshipEntity.ID + "_sail_model"), "main");
 	private final ModelPart LongShipSail;
 	private final ModelPart sail_4;
 	private final ModelPart segel_1_12;
@@ -522,10 +522,24 @@ public class LongshipSailModel extends SailModel {
 
 		showSail(state, this.sail_0, this.sail_1, this.sail_2, this.sail_3, this.sail_4, this.sail_1_bottom, this.sail_2_bottom, this.sail_3_bottom);
 
+		this.rope_4.visible = state == 0;
+		this.rope_5.visible = state == 0;
+
+		this.rope_7.visible = state == 1;
+		this.rope_8.visible = state == 1;
+
+		this.rope_11.visible = state == 2;
+		this.rope_12.visible = state == 2;
+
+		this.rope_19.visible = state == 3;
+		this.rope_20.visible = state == 3;
+
+		this.rope_16.visible = state == 4;
+		this.rope_15.visible = state == 4;
 	}
 
 	@Override
-	public void renderToBuffer(PoseStack poseStack, VertexConsumer buffer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha){
-		LongShipSail.render(poseStack, buffer, packedLight, packedOverlay, red, green, blue, alpha);
+	public void renderToBuffer(PoseStack poseStack, VertexConsumer buffer, int packedLight, int packedOverlay, int color) {
+		LongShipSail.render(poseStack, buffer, packedLight, packedOverlay, color);
 	}
 }
