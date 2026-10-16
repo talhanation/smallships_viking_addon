@@ -522,6 +522,20 @@ public class LongshipSailModel extends SailModel {
 
 		showSail(state, this.sail_0, this.sail_1, this.sail_2, this.sail_3, this.sail_4, this.sail_1_bottom, this.sail_2_bottom, this.sail_3_bottom);
 
+		this.rope_4.visible = state == 0;
+		this.rope_5.visible = state == 0;
+
+		this.rope_7.visible = state == 1;
+		this.rope_8.visible = state == 1;
+
+		this.rope_11.visible = state == 2;
+		this.rope_12.visible = state == 2;
+
+		this.rope_19.visible = state == 3;
+		this.rope_20.visible = state == 3;
+
+		this.rope_16.visible = state == 4;
+		this.rope_15.visible = state == 4;
 	}
 
 	@Override
